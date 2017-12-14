@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>百度地图API显示多个标注点带提示的代码</title>
+    <!--css-->
+    <link href="style/demo.css" rel="stylesheet" type="text/css" />
+    <!--javascript-->
+    <script src="scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="scripts/demo.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="demo_main">
+        <fieldset class="demo_title">
+            百度地图API显示多个标注点带提示的代码
+        </fieldset>
+        <fieldset class="demo_content">
+            <div style="min-height: 800px; width: 100%;" id="map">
+            </div>
+            <script type="text/javascript">
+                var markerArr = [{
+                        title: "福田区最美主题KTV",
+                        point: "114.059291,22.527696",
+                        address: "福田区石厦北二街马成时代广场四楼",
+                    },
+                    {
+                        title: "一千零九密室逃脱",
+                        point: "114.124626,22.550014",
+                        address: "罗湖区深南东路百货广场大厦西座商住楼1009",
+                    },
+                    {
+                        title: "御金莎游泳健身",
+                        point: "114.131934,22.563991",
+                        address: "罗湖区文锦北路1010-4号",
+                    },
+                    {
+                        title: "阳关羽毛球",
+                        point: "113.918087,22.529298",
+                        address: "南山区桂庙路116号阳光文体中心二层",
+                    },
+                    {
+                        title: "一麻一辣古法香锅(海上世界店)",
+                        point: "113.922139,22.488062",
+                        address: "南山区海上世界环船广场B区三楼307铺",
+                    },
+                    {
+                        title: "猿动力健身",
+                        point: "114.028937,22.538457",
+                        address: "罗湖区太宁路五方家居广场综合四楼",
+                    },
+                    {
+                        title: "悦月时光国际孕娩管理中心",
+                        point: "113.921729,22.49656",
+                        address: "南山区招商街道工业四路四号9号（深圳母婴城）",
+                    },
+                    {
+                        title: "小麦私人健身工作室（南新店）",
+                        point: "113.946368,22.531036",
+                        address: "南山区粤海街道高新南九道与高新南十道交汇处卫星大厦8楼811室",
+                    },
+                    {
+                        title: "旋羽射箭俱乐部",
+                        point: "113.932867,22.553712",
+                        address: "南山区大新路89号海大创意园西座南门6楼",
+                    },
+                    {
+                        title: "深圳市美高途科技有限公司",
+                        point: "113.947067,22.512537",
+                        address: "南山区中心路（深圳湾段）3019号天虹商场总部大厦君尚百货四楼达宝恩",
+                    },
+                    {
+                        title: "深圳野生动物园",
+                        point: "113.978411,22.604655",
+                        address: "深圳野生动物园",
+                    },
+                    {
+                        title: "圈创101社区",
+                        point: "113.924089,22.500318",
+                        address: "南山区工业六路圈创101社区",
+                    },
+                    {
+                        title: "品秀KTV音乐会所",
+                        point: "113.924653,22.48926",
+                        address: "南山区蛇口海上世界明华轮后C区广场3楼",
+                    },
+                    {
+                        title: "普拉达健身 蛇口希尔顿店",
+                        point: "113.921871,22.48376",
+                        address: "南山区望海路蛇口希尔顿南海翼酒店",
+                    },
+                    {
+                        title: "强记海鲜菜馆（枫叶店）",
+                        point: "113.927624,22.522067",
+                        address: "南山区南山大道南园枫叶广场105A(枫叶城市酒店对面)",
+                    },
+                    {
+                        title: "蓝色AR",
+                        point: "113.974623,22.600504",
+                        address: "深圳野生动物园",
+                    },
+                    {
+                        title: "跨界空间健身玩乐综合体（休闲娱乐）",
+                        point: "113.979888,22.567528",
+                        address: "南山区龙珠四路88号",
+                    },
+                    {
+                        title: "加糖运动Plustime Fitness(创业路点)",
+                        point: "113.937469,22.520859",
+                        address: "南山区创业路2052-34南山茶叶城一楼",
+                    },
+                    {
+                        title: "晶品陈浩口腔",
+                        point: "113.92186,22.5435",
+                        address: "南山区前海路一甲海边新村商业步行街3202号铺",
+                    },
+                    {
+                        title: "佳兆业",
+                        point: "113.977879,22.60255",
+                        address: "深圳野生动物园",
+                    },
+                    {
+                        title: "海大大蒸汽海鲜主题餐厅",
+                        point: "113.92663,22.540032",
+                        address: "南山区金鸡路34号四季丽晶大厦2楼（欢乐颂麦当劳旁）",
+                    },
+                    {
+                        title: "旋羽射箭俱乐部",
+                        point: "113.932651,22.553537",
+                        address: "南山区大新路89号海大创意园西座南门6楼",
+                    },
+                    {
+                        title: "轰趴工厂",
+                        point: "113.937416,22.560028",
+                        address: "南山区北环大道10014号（金羽羽毛球馆旁）",
+                    },
+                    {
+                        title: "汉虾王（科技园店）",
+                        point: "113.956005,22.548205",
+                        address: "南山区高新园科技路11号伟杰置业一楼",
+                    },
+                    {
+                        title: "个斑马（保利店）",
+                        point: "113.945287,22.522656",
+                        address: "南山区文心五路保利文化广场2楼",
+                    },
+                    {
+                        title: "E-GO VR真人竞技场",
+                        point: "113.930471,22.527866",
+                        address: "南山区南山大道南油第四工业区7栋710",
+                    },
+                    {
+                        title: "动物家族",
+                        point: "113.938025,22.523731",
+                        address: "南山区粤海街道海德二道223号",
+                    },
+                    {
+                        title: "迪拜音乐会所",
+                        point: "113.925509,22.536093",
+                        address: "南山区南新路南新大厦1-4楼",
+                    },
+                    {
+                        title: "顶真牛肉潮式火锅（常兴店）",
+                        point: "113.927444,22.530687",
+                        address: "南山区常兴路1号顺天大厦一楼（地铁11号线南山站H出口）",
+                    },
+                    {
+                        title: "CrossFit Moo(南山店)",
+                        point: "113.947769,22.554848",
+                        address: "南山区海天二路深圳易思博软件大厦3楼305",
+                    },
+
+                ];
+                function map_init() {
+                    var map = new BMap.Map("map"); // 创建Map实例  
+                    var point = new BMap.Point(114.059291,22.527696); //地图中心点，深圳  
+                    map.centerAndZoom(point, 13); // 初始化地图,设置中心点坐标和地图级别。  
+                    map.enableScrollWheelZoom(true); //启用滚轮放大缩小  
+                    //向地图中添加缩放控件  
+                    var ctrlNav = new window.BMap.NavigationControl({
+                        anchor: BMAP_ANCHOR_TOP_LEFT,
+                        type: BMAP_NAVIGATION_CONTROL_LARGE
+                    });
+                    map.addControl(ctrlNav);
+
+                    //向地图中添加缩略图控件  
+                    var ctrlOve = new window.BMap.OverviewMapControl({
+                        anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                        isOpen: 1
+                    });
+                    map.addControl(ctrlOve);
+
+                    //向地图中添加比例尺控件  
+                    var ctrlSca = new window.BMap.ScaleControl({
+                        anchor: BMAP_ANCHOR_BOTTOM_LEFT
+                    });
+                    map.addControl(ctrlSca);
+
+                    var point = new Array(); //存放标注点经纬信息的数组  
+                    var marker = new Array(); //存放标注点对象的数组  
+                    var info = new Array(); //存放提示信息窗口对象的数组  
+                    for (var i = 0; i < markerArr.length; i++) {
+                        var p0 = markerArr[i].point.split(",")[0]; //  
+                        var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来  
+                        point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点  
+                        marker[i] = new window.BMap.Marker(point[i]); //按照地图点坐标生成标记  
+                        map.addOverlay(marker[i]);
+                        marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画  
+                        var label = new window.BMap.Label(markerArr[i].title, {
+                            offset: new window.BMap.Size(20, -10)
+                        });
+                        marker[i].setLabel(label);
+                        info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;’>" + markerArr[
+                                i].title + "</br>地址：" + markerArr[i].address + "</br> 电话：" + markerArr[i].tel +
+                            "</br></p>"); // 创建信息窗口对象  
+                    }
+                    marker[0].addEventListener("mouseover", function () {
+                        this.openInfoWindow(info[0]);
+                    });
+                    marker[1].addEventListener("mouseover", function () {
+                        this.openInfoWindow(info[1]);
+                    });
+                    marker[2].addEventListener("mouseover", function () {
+                        this.openInfoWindow(info[2]);
+                    });
+                }
+                //异步调用百度js  
+                function map_load() {
+                    var load = document.createElement("script");
+                    load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+                    document.body.appendChild(load);
+                }
+                window.onload = map_load;
+            </script>
+        </fieldset>
+    </div>
+</body>
+
+</html>
